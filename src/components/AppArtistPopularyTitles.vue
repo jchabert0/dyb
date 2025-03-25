@@ -13,7 +13,7 @@
             </tr>
           </thead>
           <tbody>
-          <tr v-for="titre in titresPopulairesTries" :key="titre._id">
+          <tr v-for="titre in titresPopulairesPagines" :key="titre._id">
             <td>
               <img :src="titre.couverture" style="width: 30px;">
             </td>
@@ -21,7 +21,7 @@
               {{ capitalizeFirstLetter(titre.titre) }}
             </td>
             <td class="text-right align-middle">
-              2:45
+              {{ formatDuration(titre.dureeSecondes) }}
             </td>
             <td class="text-right align-middle">
               {{ thousandsSeparator(titre.nombreEcoutes) }}
@@ -29,12 +29,13 @@
           </tr>
           </tbody>
           <tfoot>
-            <tr>
-              <td colspan="4" class="text-center">
-                <fa icon="add"></fa>
-                Afficher plus de titres
-              </td>
-            </tr>
+            <tr v-if="titresAffiches < titresPopulairesTries.length">
+    <td colspan="4" class="text-center">
+      <button class="btn btn-primary" @click="showMoreTitles">
+        Afficher plus de titres ({{ titresRestants }} restants)
+      </button>
+    </td>
+  </tr>
           </tfoot>
         </table>
       </div>
@@ -60,7 +61,8 @@ export default {
   data() {
     return {
       artist: null,
-      titresPopulaires: []
+      titresPopulaires: [],
+      titresAffiches: 5
     };
   },
   async mounted() {
@@ -75,6 +77,9 @@ export default {
   }
 },
 computed: {
+  titresRestants() {
+    return Math.max(0, this.titresPopulairesTries.length - this.titresAffiches);
+  },
   titresPopulairesTries() {
     return [...this.allMusiques].sort((a, b) => {
       const aEcoutes = Number(a.nombreEcoutes);
@@ -82,6 +87,9 @@ computed: {
       return bEcoutes - aEcoutes;
     });
   },
+  titresPopulairesPagines() {
+      return this.titresPopulairesTries.slice(0, this.titresAffiches);
+    },
   allMusiques() {
       return this.artist.albums.reduce((acc, album) => {
         return acc.concat(album.musiques);
@@ -96,6 +104,14 @@ methods: {
   if (!string) return '';
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 },
+formatDuration(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+},
+showMoreTitles() {
+      this.titresAffiches += 5;
+    },
   async fetchArtist(artistId) {
     try {
       const response = await axios.get('http://localhost:8085/artistes.json');
