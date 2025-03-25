@@ -9,6 +9,8 @@
         <img 
           :src="album.couverture || 'http://localhost:8085/img/album/No-album-art.png'"
           :alt="album.intitule"
+          height="130"
+          width="130"
           class="img-thumbnail"
         />
         <h5>

@@ -15,7 +15,8 @@
           <tbody>
           <tr v-for="titre in titresPopulairesPagines" :key="titre._id">
             <td>
-              <img :src="titre.couverture" style="width: 30px;">
+              <!-- Image inexistante -->
+              <!--<img :src="titre.couverture" :alt="titre.couverture" width="30" height="30">-->
             </td>
             <td class="align-middle">
               {{ capitalizeFirstLetter(titre.titre) }}
@@ -42,7 +43,6 @@
     </div>
     </div>
     <div v-else>Titres introuvables ou en cours de chargement...</div>
-
 </template>
 
 <script>
@@ -55,8 +55,6 @@ export default {
       type: String,
       required: true
     }
-  },
-  components: {
   },
   data() {
     return {

@@ -1,7 +1,7 @@
 <template>
-  <div class="col-sm-3 mg-b">
+  <div class="col-sm-3 mg-b" v-if="artist">
     <div class="card mb-4">
-      <img class="card-img-top" :src="artist.photo" :alt="artist.prenom+' '+artist.nom">
+      <img class="card-img-top" :src="artist.photo" :alt="artist.prenom+' '+artist.nom" width="208" height="208" />
       <span class="text-white" style="padding: .75rem 1.25rem; margin-top:-2.35rem; background: linear-gradient(to top, black 0%, transparent 100%)">
         Nombre d'écoutes : <b>{{ thousandsSeparator(totalEcoutes) }}</b>
       </span>

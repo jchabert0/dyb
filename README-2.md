@@ -1,0 +1,4 @@
+- Les v-if sur des balises <template> sont inactif, je les aient mis sur une <div> 'wrapper'
+- Les <img> doivent avoir un height et une width en attribut pour ne pas créer de Cumulative Layout Shit (web core vitals)
+- On charge une image sur les titres populaires qui n'existe pas, je l'ai commenté
+- Pour les filtres, j'ai ajouté un aria-label sur les <a> pour l'accessibilité, mais pourquoi ne pas utilisé un select plutôt ?

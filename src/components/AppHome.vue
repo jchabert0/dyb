@@ -1,10 +1,6 @@
 <template>
-  <!-- Ajouter les Filtres dans la navigation et les garder dans le store pour les conserver lors de la navigation -->
   <TheNavigationForHome @sortChanged="handleSortChanged" @searchChanged="handleSearchChanged"></TheNavigationForHome>
-
-  <!-- Prendre en compte les filtres pour afficher seulement les artistes correspondants à la recherche DONE -->
   <div class="row" v-if="filteredArtists.length">
-    <!-- Ajouter les informations de nombre d'écoutes DONE -->
     <ArtistCardForHome v-for="artist in filteredArtists" :artist="artist" :key="artist._id"></ArtistCardForHome>
   </div>
   <div class="alert alert-secondary" role="alert" v-else>
@@ -25,8 +21,8 @@ export default {
   },
   data() {
     return {
-      artists: [],  // Liste complète des artistes
-      searchQuery: '',  // Champ de recherche
+      artists: [],
+      searchQuery: '',
       sortBy: 'nom',
       sortOrder: 'asc'
     };
@@ -35,7 +31,6 @@ export default {
     axios.get('http://localhost:8085/artistes.json').then(data => this.artists = data.data);
   },
   computed: {
-    // Calcul du nombre total d'écoutes par artiste
     artistsWithTotalEcoutes() {
       return this.artists.map(artist => {
         const totalEcoutes = artist.albums.reduce((total, album) => {
@@ -49,7 +44,6 @@ export default {
       });
     },
     
-    // Filtrer les artistes en fonction du texte de recherche
     filteredArtists() {
       return this.sortedArtists.filter(artist => {
         const searchText = this.searchQuery.toLowerCase();
@@ -84,7 +78,7 @@ export default {
       this.sortOrder = sortOrder;
     },
     handleSearchChanged(query) {
-      this.searchQuery = query  // Mettre à jour la valeur de searchQuery
+      this.searchQuery = query
     }
   }
 }

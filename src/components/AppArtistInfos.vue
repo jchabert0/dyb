@@ -2,7 +2,7 @@
     <div v-if="artist">
         <div class="row border-bottom mb-4 pb-4">
         <div class="col-lg-2">
-    <img :src="artist.photo" :alt="artist.prenom+' '+artist.nom" class="img-thumbnail">
+    <img :src="artist.photo" :alt="artist.prenom+' '+artist.nom" height="130" width="130" class="img-thumbnail">
         <span class="badge badge-secondary mr-2 mt-1" v-for="tag in artist.tags" :key="tag">
           {{ tag }}
         </span>
@@ -35,7 +35,6 @@
     </div>
 </div>
     <div v-else>Artiste introuvable ou en cours de chargement...</div>
-
 </template>
 
 <script>

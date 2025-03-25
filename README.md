@@ -32,4 +32,4 @@ Des todos ont été laissés dans les fichiers. Il vous est demandé de les rés
 Le but est d'avoir un code propre avec des composant réutilisables. [Le respect des conventions vuejs sera pris en compte lors de l'évaluation.](https://v3.vuejs.org/style-guide/)
 
 Le code existant n'est pas parfait et vos améliorations seront grandement appréciées.
-De plus les les logs sur git seront prix dans la notation.
+De plus les logs sur git seront prix en compte dans la notation.
