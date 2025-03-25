@@ -55,8 +55,8 @@ import AppArtistAlbums from '../components/AppArtistAlbums';
 // TODO : formater les nombres d'écoutes pour les rendre plus facile à lire avec un séparateur de milliers // DONE
 // TODO : récupérer et ordonner les vrais titres les plus écoutés de l'artiste // DONE
 // TODO : afficher 5 ou 10 titres et changer le texte du bouton "Afficher plus de titres" en fonction de l'état // DONE
-// TODO : Afficher les albums par ordre chronologique de sortie décroissant en bas de page
-// TODO : Afficher la durée des musiques au format minutes:secondes
+// TODO : Afficher les albums par ordre chronologique de sortie décroissant en bas de page // DONE
+// TODO : Afficher la durée des musiques au format minutes:secondes // DONE
 export default {
   name: "Artist",
   props: {
