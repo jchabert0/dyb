@@ -12,7 +12,6 @@ import './assets/css/animate.min.css';
 import VueNumberFormat from 'vue-number-format';
 import moment from 'moment';
 
-
 axios.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 

@@ -1,24 +1,31 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
 
-const store = createStore({
+export default new Vuex.Store({
   state: {
-    artists: []
-  },
-  getters: {
-     getArtists(state) {
-      return state.artists;
-    }
+    searchQuery: "",
+    sortBy: "nom",
+    sortOrder: "asc",
   },
   mutations: {
-    setArtists(state, artists) {
-      if (!artists) {
-        artists = [];
-      }
-      
-      state.artists = artists;
-    }
+    SET_SEARCH_QUERY(state, query) {
+      state.searchQuery = query;
+    },
+    SET_SORT(state, { sortBy, sortOrder }) {
+      state.sortBy = sortBy;
+      state.sortOrder = sortOrder;
+    },
   },
-  strict: true
+  actions: {
+    updateSearchQuery({ commit }, query) {
+      commit("SET_SEARCH_QUERY", query);
+    },
+    updateSort({ commit }, { sortBy, sortOrder }) {
+      commit("SET_SORT", { sortBy, sortOrder });
+    },
+  },
+  getters: {
+    getSearchQuery: (state) => state.searchQuery,
+    getSortBy: (state) => state.sortBy,
+    getSortOrder: (state) => state.sortOrder,
+  },
 });
-
-export default store;
