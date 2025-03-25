@@ -13,18 +13,18 @@
             </tr>
           </thead>
           <tbody>
-          <tr v-for="titre in titresPopulaires" :key="titre._id">
+          <tr v-for="titre in titresPopulairesTries" :key="titre._id">
             <td>
               <img :src="titre.couverture" style="width: 30px;">
             </td>
             <td class="align-middle">
-              {{ titre.titre }}
+              {{ capitalizeFirstLetter(titre.titre) }}
             </td>
             <td class="text-right align-middle">
               2:45
             </td>
             <td class="text-right align-middle">
-              {{titre.nombreEcoutes}}
+              {{ thousandsSeparator(titre.nombreEcoutes) }}
             </td>
           </tr>
           </tbody>
@@ -65,7 +65,6 @@ export default {
   },
   async mounted() {
     this.fetchArtist(this.id);
-    this.titresPopulaires = this.mostListenedSongs();
   },
   watch: {
   id: {
@@ -75,66 +74,37 @@ export default {
     }
   }
 },
+computed: {
+  titresPopulairesTries() {
+    return [...this.allMusiques].sort((a, b) => {
+      const aEcoutes = Number(a.nombreEcoutes);
+      const bEcoutes = Number(b.nombreEcoutes);
+      return bEcoutes - aEcoutes;
+    });
+  },
+  allMusiques() {
+      return this.artist.albums.reduce((acc, album) => {
+        return acc.concat(album.musiques);
+      }, []);
+    }
+},
 methods: {
+  thousandsSeparator (number, separator = ' ') {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+  },
+  capitalizeFirstLetter(string) {
+  if (!string) return '';
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+},
   async fetchArtist(artistId) {
     try {
       const response = await axios.get('http://localhost:8085/artistes.json');
       this.artist = response.data.find(a => a._id === artistId) || null;
-      this.artistsSimilaires = [];
-    for (var j in response.data) {
-      if(response.data[j].styleMusical === this.artist.styleMusical && response.data[j]._id !== this.artist._id) {
-        this.artistsSimilaires.push(response.data[j]);
-      }
-    }
     } catch (error) {
       console.error("Erreur lors du chargement des artistes :", error);
       this.artist = null;
     }
-  },
-  mostListenedSongs() {
-      return [
-        {
-          "_id": "618ae89fc40339e626d8dff2",
-          "numero": 0,
-          "titre": "reprehenderit in voluptate",
-          "dureeSecondes": 293,
-          "nombreEcoutes": 806453529,
-          "couverture": "http://localhost:8085/img/album/618ae89f89d64f81153d54c1.jpeg"
-        },
-        {
-          "_id": "618ae89ff18f04ae3de8ce14",
-          "numero": 1,
-          "titre": "minim",
-          "dureeSecondes": 231,
-          "nombreEcoutes": 129446587,
-          "couverture": "http://localhost:8085/img/album/618ae89f89d64f81153d54c1.jpeg"
-        },
-        {
-          "_id": "618ae89f771d425479ac8e65",
-          "numero": 2,
-          "titre": "tempor cupidatat",
-          "dureeSecondes": 239,
-          "nombreEcoutes": 741808849,
-          "couverture": "http://localhost:8085/img/album/618ae89f89d64f81153d54c1.jpeg"
-        },
-        {
-          "_id": "618ae89f506ca1120b835347",
-          "numero": 3,
-          "titre": "deserunt",
-          "dureeSecondes": 323,
-          "nombreEcoutes": 182839200,
-          "couverture": "http://localhost:8085/img/album/618ae89f89d64f81153d54c1.jpeg"
-        },
-        {
-          "_id": "618ae89f3cc86e1ea38d91f3",
-          "numero": 4,
-          "titre": "labore enim mollit",
-          "dureeSecondes": 270,
-          "nombreEcoutes": 374839288,
-          "couverture": "http://localhost:8085/img/album/618ae89f89d64f81153d54c1.jpeg"
-        }
-      ];
-    }
+  }
 }
 };
 </script>

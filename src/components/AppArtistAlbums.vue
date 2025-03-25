@@ -27,7 +27,7 @@
       </div>
     </div>
     </div>
-    <div v-else>Artiste introuvable ou en cours de chargement...</div>
+    <div v-else>Albums introuvable ou en cours de chargement...</div>
 
 </template>
 
