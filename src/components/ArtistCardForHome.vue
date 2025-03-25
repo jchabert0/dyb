@@ -2,7 +2,7 @@
   <div class="col-sm-3 mg-b">
     <div class="card mb-4">
       <img class="card-img-top" :src="artist.photo" :alt="artist.prenom+' '+artist.nom">
-      <span class="text-white" style="padding: .75rem 1.25rem; margin-top:-2.35rem; background: linear-gradient(to top, black 0%, transparent 100%)">Nombre d'écoutes : <b>TEST</b></span>
+      <span class="text-white" style="padding: .75rem 1.25rem; margin-top:-2.35rem; background: linear-gradient(to top, black 0%, transparent 100%)">Nombre d'écoutes : <b >TODO</b></span>
       <div class="card-body">
         <h5 class="card-title">
           {{artist.prenom}} {{artist.nom}}
@@ -14,12 +14,7 @@
     </div>
   </div>
 </template>
-
 <script>
-
-/**
- * Afficher le nombre d'écoutes à la place du todo.
- */
 
 export default {
     name: "ArtistCardForHome",
