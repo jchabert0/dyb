@@ -1,45 +1,8 @@
 <template>
   <template v-if="artist">
     <AppArtistInfos :id="artist._id"/>
-    <div class="row mb-4">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-7">
-        <table class="table table-striped">
-          <thead class="thead-light">
-            <tr>
-              <th></th>
-              <th>Titres populaires</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr v-for="titre in titresPopulaires" :key="titre._id">
-            <td>
-              <img :src="titre.couverture" style="width: 30px;">
-            </td>
-            <td class="align-middle">
-              {{ titre.titre }}
-            </td>
-            <td class="text-right align-middle">
-              2:45
-            </td>
-            <td class="text-right align-middle">
-              {{titre.nombreEcoutes}}
-            </td>
-          </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4" class="text-center">
-                <fa icon="add"></fa>
-                Afficher plus de titres
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
+
+    <AppArtistPopularyTitles :id="artist._id"/>
 
     <div class="row mb-4 border-bottom mb-4 pb-4">
       <div class="col-lg-2">
@@ -67,6 +30,7 @@
         </table>
       </div>
     </div>
+    
     <div class="row mb-4 border-bottom mb-4 pb-4">
       <div class="col-lg-2">
         <img src="http://localhost:8085/img/album/No-album-art.png" :alt="artist.prenom+' '+artist.nom" class="img-thumbnail">
@@ -104,8 +68,8 @@
 
 <script>
 import axios from 'axios';
-import FontAwesomeIcon from '../plugins/font-awesome';
 import AppArtistInfos from '../components/AppArtistInfos';
+import AppArtistPopularyTitles from '../components/AppArtistPopularyTitles';
 
 // TODO : Séparer cette page monolithique en composants réutilisables
 // TODO : Afficher les titres des chansons avec une majucule sur la première lettre
@@ -123,8 +87,8 @@ export default {
     }
   },
   components: {
-    fa: FontAwesomeIcon,
-    AppArtistInfos
+    AppArtistInfos,
+    AppArtistPopularyTitles
   },
   data() {
     return {
