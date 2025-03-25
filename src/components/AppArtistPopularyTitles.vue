@@ -48,7 +48,7 @@
 import axios from 'axios';
 
 export default {
-  name: "ArtistInfos",
+  name: "ArtistPopularyTitles",
   props: {
     id: {
       type: String,
