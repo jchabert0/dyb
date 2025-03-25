@@ -20,7 +20,14 @@
               <a class="dropdown-item" href="#" @click.prevent="setSort('nombreEcoutes', 'desc')">Nombre d'écoutes (Décroissant)</a>
             </div>
           </div>
-          <input class="form-control" type="search" placeholder="Rechercher" aria-label="Rechercher">
+          <input 
+            class="form-control" 
+            type="search" 
+            placeholder="Rechercher" 
+            aria-label="Rechercher"
+            v-model="searchQuery"
+            @input="emitSearchChange"
+          />
         </div>
       </form>
     </div>
@@ -32,6 +39,7 @@ export default {
   name: "TheNavigationForHome",
   data() {
     return {
+      searchQuery: "",
       sortBy: 'nom',
       sortOrder: 'asc'
     };
@@ -41,8 +49,12 @@ export default {
       this.sortBy = sortBy;
       this.sortOrder = sortOrder;
       this.$emit('sortChanged', { sortBy, sortOrder });
+    },
+    emitSearchChange() {
+    console.log('Événement searchChanged émis avec :', this.searchQuery);
+      this.$emit('searchChanged', this.searchQuery);  // Emission de l'événement 'searchChanged'
     }
-  }
+  },
 };
 </script>
 
